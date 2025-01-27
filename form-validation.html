@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form - HTML</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #B2C9AD;
+        }
+        
+        #invalidUname , #invalidPass{
+            color: red;
+        }
+
+        input[type="text"], input[type="password"], select{
+            width: 200px;
+            padding: 6px;
+            border-radius: 5px;
+            border: none;
+        }   
+
+        input[type="radio"], input[type="checkbox"]{
+            width: 15px;
+            height: 15px;
+        }
+        label{
+            font-size: 18px;
+        }
+
+
+        table{
+            background-color:#91AC8F;
+            box-shadow: 5px 5px 8px grey;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+        }
+        td{
+            padding: 4px;
+        }
+        #submit, #reset{
+            font-size: 18px;
+            background-color: #66785F;
+            color: whitesmoke;
+            border-radius: 10px;
+            padding: 6px;
+            border: none;
+        }
+        center{
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+        }
+        #submit:hover, #reset:hover{
+            color:white;
+            background-color: #4B5945;
+            cursor: pointer;
+            transform: scale(1.1);
+            transition: all 0.5s ease;
+        }
+
+    </style>
+</head>
+
+<body>
+    <center>
+        <form id="myForm">
+            <table>
+                <tr>
+                    <th colspan="2"><h1>Create Form</h1></th>
+                </tr>
+                    
+                <tr>
+                    <td><label for="username">Username:</label></td>
+                    <td><input type="text" id="username" name="username"></td>
+                    
+                </tr>
+
+                <tr>
+                    <td colspan="2"><span id="invalidUname"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="password" id="password" name="password"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><span id="invalidPass"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label for="employment">City of Employment:</label></td>
+                    <td><input type="text" id="employment" name="employment"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="webserver">Webserver:</label></td>
+                    <td>
+                        <select name="webserver" id="webserver">
+                            <option value="default">-choose a server-</option>
+                            <option value="default">Cloud server</option>
+                            <option value="default">File server</option>
+                            <option value="default">Proxy server</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="role">Please specify <br> your role:</label></td>
+                    <td>
+                        <input type="radio" name="role" id="admin">
+                        <label for="admin">Admin</label><br>
+                        <input type="radio" name="role" id="engineer">
+                        <label for="engineer">Engineer</label><br>
+                        <input type="radio" name="role" id="manager">
+                        <label for="manager">Manager</label><br>
+                        <input type="radio" name="role" id="guest">
+                        <label for="guest">Guest</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="Sign-on">Single Sign-on <br> to the following:</label></td>
+                    <td>
+                        <input type="checkbox" name="mail" id="mail">
+                        <label for="mail">Mail</label><br>
+                        <input type="checkbox" name="payroll" id="payroll">
+                        <label for="payroll">Payroll</label><br>
+                        <input type="checkbox" name="self-service" id="self-service">
+                        <label for="self-service">Self-Service</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <center id="btn">
+                            <input type="submit" value="Submit" id="submit">
+                            <input type="reset" value="Reset" id="reset">
+                        </center>
+                    </td>
+                </tr>
+
+            </table>
+
+        </form>
+    </center>
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+        let isValid = true;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+      
+        const invalidUname = document.getElementById('invalidUname');
+        if (username === '') {
+            invalidUname.textContent = 'Username is required';
+            isValid = false;
+        } else {
+            invalidUname.textContent = '';
+        }
+        
+        const invalidPass = document.getElementById('invalidPass');
+        if (password === '') {
+            invalidPass.textContent = 'Password is required';
+            isValid = false;
+        } 
+        else if ( password.length < 8) {
+            invalidPass.textContent = 'Password must be at least 8 characters';
+            isValid = false;
+        }
+        else if (!/\d/.test(password)) {
+            invalidPass.textContent = 'Password must contain at least one number';
+            isValid = false;
+        }
+        else {
+            invalidPass.textContent = '';
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>
